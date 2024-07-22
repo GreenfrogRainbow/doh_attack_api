@@ -129,10 +129,12 @@ class testDataa(APIView):
         # print(end_time)
 
         # Handle pcaps
-        for i in range(32):
-            filename = 'tcpdump_' + str(i+1) + '.pcap'
-            csv_name = 'flow_data_' + str(i+1) + '.csv'
-            analysePcap(os.path.join(pcaps_path, filename), os.path.join(csvs_path, csv_name))
+        # for i in range(32):
+        #     filename = 'tcpdump_' + str(i+1) + '.pcap'
+        #     csv_name = 'flow_data_' + str(i+1) + '.csv'
+        #     analysePcap(os.path.join(pcaps_path, filename), os.path.join(csvs_path, csv_name))
+
+        # This is new test
 
         return baseDataResponse(message='success', data='IP_infos')
 
