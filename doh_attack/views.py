@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from doh_attack.serializer import *
 from django.http import JsonResponse
 from doh_attack.utils import *
+from doh_attack.go_predict import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 source_path = os.path.join(BASE_DIR, 'static')
@@ -134,9 +135,21 @@ class testDataa(APIView):
         #     csv_name = 'flow_data_' + str(i+1) + '.csv'
         #     analysePcap(os.path.join(pcaps_path, filename), os.path.join(csvs_path, csv_name))
 
-        analysePcap(os.path.join(pcaps_path, 'tcpdump_46.pcap'), os.path.join(csvs_path, 'flow_data_46.csv'))
+        # analysePcap(os.path.join(pcaps_path, 'tcpdump_46.pcap'), os.path.join(csvs_path, 'flow_data_46.csv'))
+
+        # predict test
 
         return baseDataResponse(message='success', data='IP_infos')
+
+
+class test_predict(APIView):
+    def get(self, request):
+        data = request.query_params
+        file_id = data.get('file_id')
+        file_name = 'flow_data_' + str(file_id) + '.csv'
+        y_pred = doh_predict(os.path.join(csvs_path, file_name))
+
+        return baseDataResponse(message='预测成功', data={ 'y_pred': y_pred })
 
 
 class handlerIp2Location(APIView):
