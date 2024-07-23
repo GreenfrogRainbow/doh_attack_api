@@ -213,7 +213,8 @@ class addFileInfos(APIView):
             'domain': data['domain'],
             'tlsSession': data['tls_session'],
             'packetLen': data['packet_len'],
-            'fingerPrint': data['finger_print']
+            'fingerPrint': data['finger_print'],
+            'sessionTimeStamp': data['session_time_stamp']
         }
 
         new_data = FilesModelSerializer(data=add_data)
@@ -246,13 +247,14 @@ class getFlowInfosList(APIView):
                 new_data = {
                     'flowID': item['id'],
                     'srcIP': item['sourceIp'],
-                    'srcPort': item['source_port'],
-                    'dstIP': item['destination_ip'],
-                    'dstPort': item['destination_port'],
-                    'protocolVersion': item['tls_version'],
-                    'fingerPrint': item['finger_print'],
+                    'srcPort': item['sourcePort'],
+                    'dstIP': item['destinationIp'],
+                    'dstPort': item['destinationPort'],
+                    'protocolVersion': item['tlsVersion'],
+                    'fingerPrint': item['fingerPrint'],
                     'domain': item['domain'],
-                    'location': location
+                    'location': location,
+                    'sessionTimeStamp': item['sessionTimeStamp']
                 }
                 return_data.append(new_data)
             return baseDataResponse(message='获取成功', data=return_data)

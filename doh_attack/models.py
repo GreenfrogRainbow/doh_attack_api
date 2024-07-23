@@ -125,7 +125,7 @@ class Files(models.Model):
     tlsSession = models.CharField(max_length=255, null=False)
     packetLen = models.IntegerField()
     fingerPrint = models.CharField(max_length=255, null=False)
-    
+    sessionTimeStamp = models.BigIntegerField(default='1721713073837')
 
     class Meta:
         db_table = 'files'
