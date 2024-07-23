@@ -41,7 +41,7 @@ class FlowSession(DefaultSession):
         count = 0
         direction = PacketDirection.FORWARD
 
-        if self.output_mode != 'flow':
+        # if self.output_mode != 'flow':
             # if TLS not in packet:
             #     return
 
