@@ -196,7 +196,7 @@ class addFileInfos(APIView):
 
         filename = 'tcpdump_' + str(data['file_id']) + '.pcap'
         csv_name = 'flow_data_' + str(data['file_id']) + '.csv'
-        filesize  = os.path.getsize(os.path.join(pcaps_path, filename))
+        filesize = os.path.getsize(os.path.join(pcaps_path, filename))
 
         add_data = {
             'filename': filename,
@@ -242,8 +242,10 @@ class getFlowInfosList(APIView):
                 IP_sting = item['destinationIp']
                 IP_number = IP2Number(IP_sting)
                 IP_infos = IP2Location.objects.filter(ipFrom__lte=IP_number, ipTo__gte=IP_number)
-                IP_infos = list(IP_infos.values())[0]
-                location = IP_infos['countryName'] + ' / ' + IP_infos['regionName'] + ' / ' + IP_infos['cityName']
+                countryName = IP_infos.values('countryName')
+                regionName = IP_infos.values('regionName')
+                cityName = IP_infos.values('cityName')
+                location = countryName + ' / ' + regionName + ' / ' + cityName
                 new_data = {
                     'flowID': item['id'],
                     'srcIP': item['sourceIp'],
