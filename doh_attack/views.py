@@ -257,7 +257,7 @@ class addFileInfos(APIView):
             'sessionTimeStamp': data['session_time_stamp'],
             'location': location,
             'dangerLever': dangerLever,
-            'benignProbability': y_pred
+            'benignProbability': y_pred[0][0]
         }
 
         new_data = FilesModelSerializer(data=add_data)
