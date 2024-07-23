@@ -35,7 +35,6 @@ class FlowSession(DefaultSession):
     def toPacketList(self):
         # Sniffer finished all the packets it needed to sniff.
         # It is not a good place for this, we need to somehow define a finish signal for AsyncSniffer
-        print('toPacketList ing ....')
         self.garbage_collect(None)
         return super(FlowSession, self).toPacketList()
 

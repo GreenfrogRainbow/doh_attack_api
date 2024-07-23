@@ -32,8 +32,11 @@ def analysePcap(input_file, output_file):
     sniffer.start()
 
     try:
+        print('sniffer.join()')
         sniffer.join()
     except KeyboardInterrupt:
+        print('sniffer.stop()')
         sniffer.stop()
     finally:
+        print('sniffer.join()')
         sniffer.join()
