@@ -134,7 +134,7 @@ class testDataa(APIView):
         #     csv_name = 'flow_data_' + str(i+1) + '.csv'
         #     analysePcap(os.path.join(pcaps_path, filename), os.path.join(csvs_path, csv_name))
 
-        # analysePcap(os.path.join(pcaps_path, 'tcpdump_5.pcap'), os.path.join(csvs_path, 'flow_data_5.csv'))
+        analysePcap(os.path.join(pcaps_path, 'tcpdump_46.pcap'), os.path.join(csvs_path, 'flow_data_46.csv'))
 
         return baseDataResponse(message='success', data='IP_infos')
 
