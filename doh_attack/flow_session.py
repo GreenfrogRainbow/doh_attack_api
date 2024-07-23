@@ -10,7 +10,7 @@ from doh_attack.features.context.packet_flow_key import get_packet_flow_key
 from doh_attack.flow import Flow
 from doh_attack.time_series.processor import Processor
 
-EXPIRED_UPDATE = 40
+EXPIRED_UPDATE = 40000
 
 
 class FlowSession(DefaultSession):
