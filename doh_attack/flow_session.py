@@ -10,7 +10,7 @@ from doh_attack.features.context.packet_flow_key import get_packet_flow_key
 from doh_attack.flow import Flow
 from doh_attack.time_series.processor import Processor
 
-EXPIRED_UPDATE = 40000
+EXPIRED_UPDATE = 10
 
 
 class FlowSession(DefaultSession):
@@ -56,17 +56,19 @@ class FlowSession(DefaultSession):
 
         self.packets_count += 1
 
-
         # Creates a key variable to check
         packet_flow_key = get_packet_flow_key(packet, direction)
         flow = self.flows.get((packet_flow_key, count))
+        print("First appear", flow)
 
         # If there is no forward flow with a count of 0
         if flow is None:
+            print("The outside None", flow)
             # There might be one of it in reverse
             direction = PacketDirection.REVERSE
             packet_flow_key = get_packet_flow_key(packet, direction)
             flow = self.flows.get((packet_flow_key, count))
+            print("After the outside None", flow)
 
             if flow is None:
                 # If no flow exists create a new flow
