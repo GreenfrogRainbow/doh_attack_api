@@ -228,7 +228,7 @@ class addFileInfos(APIView):
 
         isDoH, y_pred = doh_predict(csv_name)
         dangerLever = 0
-        if isDoH:
+        if isDoH :
             if y_pred < 0.01:
                 dangerLever = 3
             elif 0.01 <= y_pred < 0.05:
@@ -236,7 +236,7 @@ class addFileInfos(APIView):
             else:
                 dangerLever = 1
         else:
-            dangerLever = 2
+            dangerLever = 0
 
         add_data = {
             'filename': filename,
