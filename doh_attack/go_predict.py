@@ -5,10 +5,11 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 source_path = os.path.join(BASE_DIR, 'static')
 pkls_path = os.path.join(source_path, 'pkls')
+csvs_path = os.path.join(source_path, 'csvs')
 
 
-def doh_predict(file_path):
-    df = pd.read_csv(file_path)
+def doh_predict(file_name):
+    df = pd.read_csv(os.path.join(csvs_path, file_name))
 
     # 删除缺失值和重复值
     df = df.dropna()

@@ -147,7 +147,7 @@ class test_predict(APIView):
         data = request.query_params
         file_id = data.get('file_id')
         file_name = 'flow_data_' + str(file_id) + '.csv'
-        y_pred = doh_predict(os.path.join(csvs_path, file_name))
+        y_pred = doh_predict(file_name)
 
         return baseDataResponse(message='预测成功', data={ 'y_pred': y_pred })
 
