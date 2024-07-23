@@ -41,17 +41,17 @@ class FlowSession(DefaultSession):
         count = 0
         direction = PacketDirection.FORWARD
 
-        # if self.output_mode != 'flow':
-            # if TLS not in packet:
-            #     return
+        if self.output_mode != 'flow':
+            if TLS not in packet:
+                return
 
-            # if TLSApplicationData not in packet:
-            #     return
+            if TLSApplicationData not in packet:
+                return
 
-            # if len(packet[TLSApplicationData]) < 40:
-            #     # PING frame (len = 34) or other useless frames
+            if len(packet[TLSApplicationData]) < 40:
+                # PING frame (len = 34) or other useless frames
 
-            #     return
+                return
 
         self.packets_count += 1
 

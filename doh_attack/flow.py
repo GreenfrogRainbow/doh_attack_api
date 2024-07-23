@@ -94,6 +94,7 @@ class Flow:
 
             'DoH': self.is_doh(),
         }
+        print(data)
 
         return data
 
