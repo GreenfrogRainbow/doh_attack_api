@@ -18,7 +18,7 @@ def doh_predict(file_name):
     df = df.drop(['SourceIP', 'DestinationIP', 'TimeStamp'], axis=1)
     feature_names = df.columns
     # 提取特征和标签
-    X = df.drop('Doh', axis=1)
+    X = df.drop('DoH', axis=1)
 
     with open(os.path.join(pkls_path, 'StandardScaler.pkl'), 'rb') as f:
         scaler = pickle.load(f)
