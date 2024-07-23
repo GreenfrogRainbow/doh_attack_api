@@ -50,6 +50,7 @@ class FlowSession(DefaultSession):
 
             # if len(packet[TLSApplicationData]) < 40:
             #     # PING frame (len = 34) or other useless frames
+
             #     return
 
         self.packets_count += 1
