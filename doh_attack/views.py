@@ -190,7 +190,7 @@ def handle_file_upload(request):
         return baseResponse(message='File upload failed', success=False, code=400)
 
 
-class fileInfos(APIView):
+class addFileInfos(APIView):
     def post(self, request):
         data = request.data
 

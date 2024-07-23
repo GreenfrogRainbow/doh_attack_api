@@ -27,7 +27,7 @@ urlpatterns = [
 
     # 上传流量文件 + 添加流量信息
     path('pcapUpload/', views.handle_file_upload, name='upload'),
-    path('addFileInfos/', views.fileInfos.as_view()),
+    path('addFileInfos/', views.addFileInfos.as_view()),
 
     # 获取流量列表
     path('getFlowInfosList/', views.getFlowInfosList.as_view()),
