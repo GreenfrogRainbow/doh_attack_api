@@ -35,5 +35,5 @@ urlpatterns = [
     # 测试函数
     path('test_data/', views.testData.as_view()),
     path('test_dataa/', views.testDataa.as_view()),
-    path('test_predict', views.test_predict.as_view())
+    path('test_predict', views.testPredict.as_view())
 ]

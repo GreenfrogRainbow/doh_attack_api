@@ -142,7 +142,7 @@ class testDataa(APIView):
         return baseDataResponse(message='success', data='IP_infos')
 
 
-class test_predict(APIView):
+class testPredict(APIView):
     def get(self, request):
         data = request.query_params
         file_id = data.get('file_id')
