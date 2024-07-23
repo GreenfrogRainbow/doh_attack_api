@@ -22,6 +22,7 @@ class FlowSession(DefaultSession):
 
         if self.output_mode == 'flow':
             output = open(self.output_file, 'w')
+            print(output)
             self.csv_writer = csv.writer(output)
 
         self.packets_count = 0
@@ -35,6 +36,7 @@ class FlowSession(DefaultSession):
         # Sniffer finished all the packets it needed to sniff.
         # It is not a good place for this, we need to somehow define a finish signal for AsyncSniffer
         self.garbage_collect(None)
+        print('toPacketList ing ....')
         return super(FlowSession, self).toPacketList()
 
     def on_packet_received(self, packet):
