@@ -55,6 +55,8 @@ class FlowSession(DefaultSession):
 
         self.packets_count += 1
 
+        print('on_packet_received ing ....')
+
         # Creates a key variable to check
         packet_flow_key = get_packet_flow_key(packet, direction)
         flow = self.flows.get((packet_flow_key, count))
