@@ -34,4 +34,6 @@ def doh_predict(file_name):
         loaded_model = pickle.load(f)
 
     y_pred = loaded_model.predict_proba(X_test)
+    print(y_pred)
+
     return y_pred
