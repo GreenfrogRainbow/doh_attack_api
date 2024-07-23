@@ -245,7 +245,7 @@ class getFlowInfosList(APIView):
                 countryName = IP_infos.values('countryName')
                 regionName = IP_infos.values('regionName')
                 cityName = IP_infos.values('cityName')
-                location = countryName + ' / ' + regionName + ' / ' + cityName
+                location = countryName[0]['countryName'] + ' / ' + regionName[0]['regionName'] + ' / ' + cityName[0]['cityName']
                 new_data = {
                     'flowID': item['id'],
                     'srcIP': item['sourceIp'],
