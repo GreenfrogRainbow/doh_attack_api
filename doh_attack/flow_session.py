@@ -22,7 +22,7 @@ class FlowSession(DefaultSession):
 
         if self.output_mode == 'flow':
             output = open(self.output_file, 'w')
-            print(output)
+            print('FlowSession', output)
             self.csv_writer = csv.writer(output)
 
         self.packets_count = 0
