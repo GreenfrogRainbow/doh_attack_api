@@ -242,7 +242,7 @@ class getFlowInfosList(APIView):
                 IP_sting = item['sourceIp']
                 IP_number = IP2Number(IP_sting)
                 IP_infos = IP2Location.objects.filter(ipFrom__lte=IP_number, ipTo__gte=IP_number)
-                IP_infos = IP_infos.values()
+                IP_infos = list(IP_infos.values())[0]
                 location = IP_infos['countryName'] + ' / ' + IP_infos['regionName'] + ' / ' + IP_infos['cityName']
                 new_data = {
                     'flowID': item['id'],
