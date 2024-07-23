@@ -147,7 +147,7 @@ class testPredict(APIView):
         data = request.query_params
         file_id = data.get('file_id')
         file_name = 'flow_data_' + str(file_id) + '.csv'
-        y_pred = doh_predict(file_name)
+        isDoH, y_pred = doh_predict(file_name)
 
         return baseDataResponse(message='预测成功', data={ 'y_pred': y_pred[0][0] })
 
@@ -226,6 +226,18 @@ class addFileInfos(APIView):
         location = crcName[0]['countryName'] + ' / ' + crcName[0]['regionName'] + ' / ' + crcName[0][
             'cityName']
 
+        isDoH, y_pred = doh_predict(csv_name)
+        dangerLever = 0
+        if isDoH:
+            if y_pred < 0.01:
+                dangerLever = 3
+            elif 0.01 <= y_pred < 0.05:
+                dangerLever = 2
+            else:
+                dangerLever = 1
+        else:
+            dangerLever = 2
+
         add_data = {
             'filename': filename,
             'filesize': filesize,
@@ -243,7 +255,9 @@ class addFileInfos(APIView):
             'packetLen': data['packet_len'],
             'fingerPrint': data['finger_print'],
             'sessionTimeStamp': data['session_time_stamp'],
-            'location': location
+            'location': location,
+            'dangerLever': dangerLever,
+            'benignProbability': y_pred
         }
 
         new_data = FilesModelSerializer(data=add_data)
@@ -277,7 +291,8 @@ class getFlowInfosList(APIView):
                     'fingerPrint': item['fingerPrint'],
                     'domain': item['domain'],
                     'location': item['location'],
-                    'sessionTimeStamp': item['sessionTimeStamp']
+                    'sessionTimeStamp': item['sessionTimeStamp'],
+                    'dangerLever': item['dangerLever']
                 }
                 return_data.append(new_data)
             return baseDataResponse(message='获取成功', data=return_data)

@@ -19,6 +19,7 @@ def doh_predict(file_name):
     feature_names = df.columns
     # 提取特征和标签
     X = df.drop('DoH', axis=1)
+    isDoH = df['DoH'][0]
 
     with open(os.path.join(pkls_path, 'StandardScaler.pkl'), 'rb') as f:
         scaler = pickle.load(f)
@@ -36,4 +37,4 @@ def doh_predict(file_name):
     y_pred = loaded_model.predict_proba(X_test)
     print(y_pred)
 
-    return y_pred
+    return isDoH, y_pred

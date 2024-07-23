@@ -127,6 +127,8 @@ class Files(models.Model):
     fingerPrint = models.CharField(max_length=255, null=False)
     sessionTimeStamp = models.BigIntegerField(default='1721713073837')
     location = models.CharField(max_length=255, default='- / - / -')
+    benignProbability = models.FloatField(default=0)
+    dangerLever = models.IntegerField(default=0)
 
     class Meta:
         db_table = 'files'

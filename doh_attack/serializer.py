@@ -117,7 +117,9 @@ class FilesModelSerializer(serializers.ModelSerializer):
             "packetLen",
             "fingerPrint",
             "sessionTimeStamp",
-            "location"
+            "location",
+            "benignProbability",
+            "dangerLever"
         ]
 
 
