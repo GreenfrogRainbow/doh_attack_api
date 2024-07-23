@@ -198,6 +198,13 @@ class addFileInfos(APIView):
         csv_name = 'flow_data_' + str(data['file_id']) + '.csv'
         filesize = os.path.getsize(os.path.join(pcaps_path, filename))
 
+        IP_sting = data['destination_ip']
+        IP_number = IP2Number(IP_sting)
+        IP_infos = IP2Location.objects.filter(ipFrom__lte=IP_number, ipTo__gte=IP_number)
+        crcName = IP_infos.values('countryName', 'regionName', 'cityName')
+        location = crcName[0]['countryName'] + ' / ' + crcName[0]['regionName'] + ' / ' + crcName[0][
+            'cityName']
+
         add_data = {
             'filename': filename,
             'filesize': filesize,
@@ -214,7 +221,8 @@ class addFileInfos(APIView):
             'tlsSession': data['tls_session'],
             'packetLen': data['packet_len'],
             'fingerPrint': data['finger_print'],
-            'sessionTimeStamp': data['session_time_stamp']
+            'sessionTimeStamp': data['session_time_stamp'],
+            'location': location
         }
 
         new_data = FilesModelSerializer(data=add_data)
@@ -239,13 +247,6 @@ class getFlowInfosList(APIView):
         return_data = []
         try:
             for item in data:
-                IP_sting = item['destinationIp']
-                IP_number = IP2Number(IP_sting)
-                IP_infos = IP2Location.objects.filter(ipFrom__lte=IP_number, ipTo__gte=IP_number)
-                countryName = IP_infos.values('countryName', 'regionName', 'cityName')
-                # regionName = IP_infos.values()
-                # cityName = IP_infos.values()
-                location = countryName[0]['countryName'] + ' / ' + countryName[0]['regionName'] + ' / ' + countryName[0]['cityName']
                 new_data = {
                     'flowID': item['id'],
                     'srcIP': item['sourceIp'],
@@ -255,7 +256,7 @@ class getFlowInfosList(APIView):
                     'protocolVersion': item['tlsVersion'],
                     'fingerPrint': item['fingerPrint'],
                     'domain': item['domain'],
-                    'location': location,
+                    'location': item['location'],
                     'sessionTimeStamp': item['sessionTimeStamp']
                 }
                 return_data.append(new_data)

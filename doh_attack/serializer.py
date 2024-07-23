@@ -116,7 +116,8 @@ class FilesModelSerializer(serializers.ModelSerializer):
             "tlsSession",
             "packetLen",
             "fingerPrint",
-            "sessionTimeStamp"
+            "sessionTimeStamp",
+            "location"
         ]
 
 

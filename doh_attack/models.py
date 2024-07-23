@@ -126,6 +126,7 @@ class Files(models.Model):
     packetLen = models.IntegerField()
     fingerPrint = models.CharField(max_length=255, null=False)
     sessionTimeStamp = models.BigIntegerField(default='1721713073837')
+    location = models.CharField(max_length=255, default='- / - / -')
 
     class Meta:
         db_table = 'files'
