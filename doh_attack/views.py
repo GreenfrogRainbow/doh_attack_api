@@ -194,10 +194,18 @@ def handle_file_upload(request):
         with open('static/pcaps/' + local_file_name, 'wb+') as destination:
             for chunk in uploaded_file.chunks():
                 destination.write(chunk)
+        filename = 'tcpdump_' + str(count+1) + '.pcap'
+        csv_name = 'flow_data_' + str(count+1) + '.csv'
+        analysePcap(os.path.join(pcaps_path, filename), os.path.join(csvs_path, csv_name))
 
         # 返回上传成功的响应
-        return baseDataResponse(message='File upload success',
-                                data={ 'file_id': count + 1 })
+        filesize = os.path.getsize(os.path.join(csvs_path, csv_name))
+        if filesize != 0:
+            return baseDataResponse(message='File upload success', data={ 'file_id': count + 1 })
+        else:
+            os.remove(os.path.join(pcaps_path, filename))
+            os.remove(os.path.join(csvs_path, csv_name))
+            return baseDataResponse(message='Csv File is empty.', data={'file_id': 0})
     else:
         # 返回上传失败的响应
         return baseResponse(message='File upload failed', success=False, code=400)
@@ -241,7 +249,6 @@ class addFileInfos(APIView):
         new_data = FilesModelSerializer(data=add_data)
         if new_data.is_valid():
             new_data.save()
-            analysePcap(os.path.join(pcaps_path, filename), os.path.join(csvs_path, csv_name))
             return baseResponse(message='文件添加成功')
         return baseDataResponse(message='文件添加失败', data=new_data.errors, success=False, code=400)
 
