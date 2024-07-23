@@ -45,8 +45,8 @@ class FlowSession(DefaultSession):
             if TLS not in packet:
                 return
 
-            if TLSApplicationData not in packet:
-                return
+            # if TLSApplicationData not in packet:
+            #     return
 
             # if len(packet[TLSApplicationData]) < 40:
             #     # PING frame (len = 34) or other useless frames
