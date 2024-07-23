@@ -239,7 +239,7 @@ class getFlowInfosList(APIView):
         return_data = []
         try:
             for item in data:
-                IP_sting = item['sourceIp']
+                IP_sting = item['destinationIp']
                 IP_number = IP2Number(IP_sting)
                 IP_infos = IP2Location.objects.filter(ipFrom__lte=IP_number, ipTo__gte=IP_number)
                 IP_infos = list(IP_infos.values())[0]
