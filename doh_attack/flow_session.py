@@ -22,7 +22,6 @@ class FlowSession(DefaultSession):
 
         if self.output_mode == 'flow':
             output = open(self.output_file, 'w')
-            print('FlowSession', output)
             self.csv_writer = csv.writer(output)
 
         self.packets_count = 0
@@ -59,16 +58,13 @@ class FlowSession(DefaultSession):
         # Creates a key variable to check
         packet_flow_key = get_packet_flow_key(packet, direction)
         flow = self.flows.get((packet_flow_key, count))
-        print("First appear", flow)
 
         # If there is no forward flow with a count of 0
         if flow is None:
-            print("The outside None", flow)
             # There might be one of it in reverse
             direction = PacketDirection.REVERSE
             packet_flow_key = get_packet_flow_key(packet, direction)
             flow = self.flows.get((packet_flow_key, count))
-            print("After the outside None", flow)
 
             if flow is None:
                 # If no flow exists create a new flow

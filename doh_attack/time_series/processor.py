@@ -13,16 +13,16 @@ class Processor:
         current_clump = None
 
         for packet, direction in self.flow.packets:
-            # if TLS not in packet:
-            #     continue
-            #
-            # if TLSApplicationData not in packet:
-            #     continue
-            #
-            # if len(packet[TLSApplicationData]) < 40:
-            #     # PING frame (len = 34) or other useless frames
-            #     continue
-            #
+            if TLS not in packet:
+                continue
+
+            if TLSApplicationData not in packet:
+                continue
+
+            if len(packet[TLSApplicationData]) < 40:
+                # PING frame (len = 34) or other useless frames
+                continue
+
             if current_clump is None:
                 current_clump = Clump(direction=direction)
 
