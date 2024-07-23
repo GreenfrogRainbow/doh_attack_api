@@ -135,7 +135,7 @@ class testDataa(APIView):
         #     csv_name = 'flow_data_' + str(i+1) + '.csv'
         #     analysePcap(os.path.join(pcaps_path, filename), os.path.join(csvs_path, csv_name))
 
-        analysePcap(os.path.join(pcaps_path, 'tcpdump_11.pcap'), os.path.join(csvs_path, 'flow_data_11.csv'))
+        analysePcap(os.path.join(pcaps_path, 'tcpdump_13.pcap'), os.path.join(csvs_path, 'flow_data_13.csv'))
 
         # predict test
 
