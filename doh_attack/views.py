@@ -136,10 +136,6 @@ class testDataa(APIView):
 
         # analysePcap(os.path.join(pcaps_path, 'tcpdump_5.pcap'), os.path.join(csvs_path, 'flow_data_5.csv'))
 
-        # This is new test
-
-        # This is a test too.
-
         return baseDataResponse(message='success', data='IP_infos')
 
 
